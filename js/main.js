@@ -1,18 +1,18 @@
-require(['$api/models', '$api/activity#Feed'], function(models, feed) {
+require(['$api/models', '$api/location'], function(models, location) {
 
-    var player = models.player;
+  var player = models.player;
 
-    var track = models.Track.fromURI('spotify:track:2hNTfrAILBLesbPootV83e');
-    player.playTrack(track);
-    
-    var timeLapse = function() {
-      player.load('track').done(function(prop) {
-        console.log(prop.track.uri);
-      });
-      player.load('position').done(function(prop) {
-        console.log(prop.position);
-      });
-    };
+  var track = models.Track.fromURI('spotify:track:2hNTfrAILBLesbPootV83e');
+  player.playTrack(track);
+  
+  var timeLapse = function() {
+    player.load('track').done(function(prop) {
+      console.log(prop.track.uri);
+    });
+    player.load('position').done(function(prop) {
+      console.log(prop.position);
+    });
+  };
 
     setInterval(timeLapse,1000);
 });
