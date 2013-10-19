@@ -1,0 +1,23 @@
+html {
+	background-color: #191919;
+	color: #fff;
+}
+
+body {
+	padding: 10px;
+}
+
+header {
+	border-bottom: 1px dotted #fff;
+	margin-bottom: 10px;
+}
+
+#user img {
+	height: 120px;
+	width: 120px;
+	overflow: hidden;
+}
+
+.username {
+	color: #72ba52;
+}

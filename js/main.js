@@ -18,6 +18,9 @@ require(['$api/models'], function(models) {
     return currentPos;
   };
 
+  var user = document.getElementById('user');
+  user.innerHTML = user.innerHTML + "<img class='profile-pic' src='" + u.image + "'/><br/><span class='username'>" + u.username + "</span><br/><span class='real-name'>" + u.name + "</span>";
+
   var update = function() { 
     getTrack();
     $.ajax({
