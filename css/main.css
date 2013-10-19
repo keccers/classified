@@ -1,0 +1,9 @@
+html {
+	background-color: #000;
+	color: #fff;
+}
+
+h1 {
+	background-image: url('../images/creeper-logo.png');
+	width: 200px;
+}

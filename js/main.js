@@ -13,7 +13,6 @@ require(['$api/models', '$api/location'], function(models, location) {
       console.log(prop.position);
     });
   };
-
     setInterval(timeLapse,1000);
 });
 
