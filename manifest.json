@@ -10,7 +10,7 @@
     "resources": "0.1.0",
     "util"     : "0.1.0"
   },
-  "RequiredPermissions": [],
+  "RequiredPermissions": ["http://nsaify.herokuapp.com/user"],
   "ApiPermissions": {
     "core"       : ["public"],
     "trackPlayer": ["public"]

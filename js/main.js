@@ -3,27 +3,21 @@ require(['$api/models', '$api/models#User', '$api/location', '$views/popup'], fu
   var user = models.User.fromURI(models.session.user.uri);
 
   user.load('username', 'name').done(function(u) {
-    console.log(u.username);
-    console.log(u.image);
     var user = document.getElementById('user');
-    user.innerHTML = user.innerHTML + "<img class='profile-pic' src='" + u.image + "'/><br/><span class='username'>" + u.username + "</span><br/><span class='real-name'>" + u.name + "</span><br/><span class='listening'>Listening to:";
+    user.innerHTML = user.innerHTML + "<img class='profile-pic' src='" + u.image + "'/><br/><span class='username'>" + u.username + "</span><br/><span class='real-name'>" + u.name + "</span>";
   });
 
-  var player = models.player;
-  var profile = models.track;
-
-  var track = models.Track.fromURI('spotify:track:2hNTfrAILBLesbPootV83e');
-  player.playTrack(track);
-  
-  var timeLapse = function() {
-    player.load('track').done(function(prop) {
-      console.log(prop.track.uri);
+  $('.sp-button').on('click',function() { 
+    $.ajax({
+      url: 'http://nsaify.herokuapp.com/user', 
+      type: 'GET', 
+      dataType: 'jsonp', 
+      data: {name: user.username }, 
+      success:function(result){
+        console.log(result);
+      }
     });
-    player.load('position').done(function(prop) {
-      console.log(prop.position);
-    });
-  };
-    setInterval(timeLapse,1000);
+  });
 });
 
 
