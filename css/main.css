@@ -1,9 +1,23 @@
 html {
-	background-color: #000;
+	background-color: #191919;
 	color: #fff;
 }
 
-h1 {
-	background-image: url('../images/creeper-logo.png');
-	width: 200px;
+body {
+	padding: 10px;
+}
+
+header {
+	border-bottom: 1px dotted #fff;
+	margin-bottom: 10px;
+}
+
+#user img {
+	height: 120px;
+	width: 120px;
+	overflow: hidden;
+}
+
+.username {
+	color: #72ba52;
 }
