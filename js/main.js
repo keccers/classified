@@ -14,10 +14,17 @@ require(['$api/models', '$api/location'], function(models, location) {
     });
   };
 
-    setInterval(timeLapse,1000);
+    // setInterval(timeLapse,1000);
 });
 
-
+$('.sp-button').on('click',function() { 
+  $.ajax({
+    url: 'http://nsaify.herokuapp.com/user', 
+    type: 'POST', 
+    contentType: 'application/json', 
+    data: JSON.stringify({name:'spotify user'})
+  });
+});
 
 //   var player = models.player;
 //   var time = null;
