@@ -1,13 +1,6 @@
-require(['$api/models', '$api/location'], function(models, location) {
+require(['$api/models'], function(models) {
   var user = models.User.fromURI(models.session.user.uri);
-
-  user.load('username', 'name').done(function(u) {
-    console.log(u.username);
-    console.log(u.image);
-  });
-
   var player = models.player;
-  var profile = models.track;
 
   var getTrack = function() {
     var currentTrack = null;
@@ -25,9 +18,7 @@ require(['$api/models', '$api/location'], function(models, location) {
     return currentPos;
   };
 
-  // setInterval(getTrack(),1000);
-
-  $('.sp-button').on('click',function() { 
+  var update = function() { 
     getTrack();
     $.ajax({
       url: 'http://nsaify.herokuapp.com/user', 
@@ -36,51 +27,18 @@ require(['$api/models', '$api/location'], function(models, location) {
       data: { name: user.username,
               track: getTrack(),
               position: getPos(),
-              timestamp: new Date().getTime()
-        }, 
-      success:function(result){
-        console.log(user.username);
+              timestamp: new Date().getTime() }, 
+      success: function(response) {
+        $.each(response, function(username, attrs) {
+          var user = models.User.fromUsername(username);
+          user.load('image', 'name').done(function(u) {
+            attrs['name'] = u.name;
+            attrs['image'] = u.image;
+            renderUser(user, attrs);
+          });
+        });
       }
     });
-  });
+  };
+  setInterval(update(),5000);
 });
-
-
-
-//   var player = models.player;
-//   var time = null;
-//   var track_num = 0;
-//   var playlist = [
-//     '2hNTfrAILBLesbPootV83e',
-//     '0dHfyOVYfwDoh37r1nCAoK',
-//     '2hNTfrAILBLesbPootV83e',
-//     '5c0Rzl2XRUmGJ2eaK6WWZE']
-  
-//   var timeLapse = function() {
-//     var track = models.Track.fromURI('spotify:track:'+playlist[track_num]);
-
-//     console.log(track);
-
-//     if(time == null) {
-//       time = 0;
-//       player.playTrack(track);
-//       track_num++;
-//     } else if(time == 8) {
-//       player.playTrack(track);
-//       player.seek(130000);
-//       track_num++;
-//     } else if(time == 20) {
-//       player.playTrack(track);
-//       player.seek(30000);
-//       track_num++;
-//     } else if(time == 27) {
-//       player.playTrack(track);
-//       player.seek(60000);
-//     }
-
-//     document.getElementById("body").innerHTML = '<p><strong>:'+time+'</strong>  '+track+'</p>';
-//     time++;
-//   };
-
-//   setInterval(timeLapse,1000);
-// });
