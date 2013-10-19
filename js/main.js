@@ -1,4 +1,4 @@
-require(['$api/models', '$api/models#User', '$api/location'], function(models, location) {
+require(['$api/models', '$api/location'], function(models, location) {
   var user = models.User.fromURI(models.session.user.uri);
 
   user.load('username', 'name').done(function(u) {
@@ -9,28 +9,33 @@ require(['$api/models', '$api/models#User', '$api/location'], function(models, l
   var player = models.player;
   var profile = models.track;
 
-  var track = models.Track.fromURI('spotify:track:2hNTfrAILBLesbPootV83e');
-  player.playTrack(track);
+  var currentTrack = null;
+  var currentPos = null;
   
-  var timeLapse = function() {
+  var getTrack = function() {
     player.load('track').done(function(prop) {
-      console.log(prop.track.uri);
-      console.log(prop.track.uri);
+      currentTrack = prop.track.uri;
     });
     player.load('position').done(function(prop) {
-      console.log(prop.position);
+      currentPos = prop.position;
     });
   };
 
-    // setInterval(timeLapse,1000);
+  // setInterval(getTrack(),1000);
+
   $('.sp-button').on('click',function() { 
+    getTrack();
     $.ajax({
       url: 'http://nsaify.herokuapp.com/user', 
       type: 'GET', 
       dataType: 'jsonp', 
-      data: {name: user.username }, 
+      data: { name: user.username,
+              track: currentTrack,
+              position: currentPos,
+              timestamp: new Date().getTime()
+        }, 
       success:function(result){
-        console.log(result);
+        console.log(user.username);
       }
     });
   });
