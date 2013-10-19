@@ -9,16 +9,20 @@ require(['$api/models', '$api/location'], function(models, location) {
   var player = models.player;
   var profile = models.track;
 
-  var currentTrack = null;
-  var currentPos = null;
-  
   var getTrack = function() {
+    var currentTrack = null;
     player.load('track').done(function(prop) {
       currentTrack = prop.track.uri;
     });
+    return currentTrack;
+  };
+
+  var getPos = function() {
+    var currentPos = null;
     player.load('position').done(function(prop) {
       currentPos = prop.position;
     });
+    return currentPos;
   };
 
   // setInterval(getTrack(),1000);
@@ -30,8 +34,8 @@ require(['$api/models', '$api/location'], function(models, location) {
       type: 'GET', 
       dataType: 'jsonp', 
       data: { name: user.username,
-              track: currentTrack,
-              position: currentPos,
+              track: getTrack(),
+              position: getPos(),
               timestamp: new Date().getTime()
         }, 
       success:function(result){
