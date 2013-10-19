@@ -146,6 +146,10 @@ require(['$api/models'], function(models) {
 
       });
 
+  $('.anchorNode').on("click", function(d) {
+    $('#basic-modal-content').modal();
+  });
+
   var update = function() { 
     getTrack();
     $.ajax({
@@ -171,8 +175,6 @@ require(['$api/models'], function(models) {
   setInterval(update(),5000);
 });
 
-$('.anchorNode').click(function(){
-  console.log("HI");
-});
+
 
 
