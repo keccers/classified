@@ -19,21 +19,23 @@ require(['$api/models'], function(models) {
   };
 
 
-      var w = 960, h = 500;
+      var w = 1000, h = 800;
 
       var labelDistance = 0;
 
-      var vis = d3.select("body").append("svg:svg").attr("width", w).attr("height", h);
+      var vis = d3.select("#graph").append("svg:svg").attr("width", w).attr("height", h);
 
+      var names = ['Julia', 'Elizabeth', 'Michael', 'Erick', 'Abi', 'Priya', 'Andrew']
       var nodes = [];
       var labelAnchors = [];
       var labelAnchorLinks = [];
       var links = [];
 
       //generating data
-      for(var i = 0; i < 30; i++) {
+      for(var i = 0; i < names.length; i++) {
         var node = {
-          label : "node " + i
+          label : names[i], 
+          title : "MWHiwjoi"
         };
         nodes.push(node);
         labelAnchors.push({
@@ -48,7 +50,7 @@ require(['$api/models'], function(models) {
 
       for(var i = 0; i < nodes.length; i++) {
         for(var j = 0; j < i; j++) {
-          if(Math.random() > .95)
+          if(Math.random() > 0)
             links.push({
               source : i,
               target : j,
@@ -65,7 +67,7 @@ require(['$api/models'], function(models) {
 
       // End Generating data
 
-      var force = d3.layout.force().size([w, h]).nodes(nodes).links(links).gravity(1).linkDistance(50).charge(-3000).linkStrength(function(x) {
+      var force = d3.layout.force().size([w, h]).nodes(nodes).links(links).gravity(1).linkDistance(500).charge(-3000).linkStrength(function(x) {
         return x.weight * 10
       });
 
@@ -78,7 +80,7 @@ require(['$api/models'], function(models) {
       var link = vis.selectAll("line.link").data(links).enter().append("svg:line").attr("class", "link").style("stroke", "#CCC");
 
       var node = vis.selectAll("g.node").data(force.nodes()).enter().append("svg:g").attr("class", "node");
-      node.append("svg:circle").attr("r", 5).style("fill", "#555").style("stroke", "#FFF").style("stroke-width", 3);
+      node.append("svg:circle").attr("r", 5).style("fill", "#fff").style("stroke", "#FFF").style("stroke-width", 3);
       node.call(force.drag);
 
 
@@ -88,7 +90,7 @@ require(['$api/models'], function(models) {
       anchorNode.append("svg:circle").attr("r", 0).style("fill", "#FFF");
         anchorNode.append("svg:text").text(function(d, i) {
         return i % 2 == 0 ? "" : d.node.label
-      }).style("fill", "#555").style("font-family", "Arial").style("font-size", 12);
+      }).style("fill", "#72ba52").style("font-family", "Helvetica").style("font-size", 20).style("font-weight", 'bold');
 
       var updateLink = function() {
         this.attr("x1", function(d) {
@@ -144,8 +146,6 @@ require(['$api/models'], function(models) {
 
       });
 
-
-
   var update = function() { 
     getTrack();
     $.ajax({
@@ -170,3 +170,9 @@ require(['$api/models'], function(models) {
   };
   setInterval(update(),5000);
 });
+
+$('.anchorNode').click(function(){
+  console.log("HI");
+});
+
+

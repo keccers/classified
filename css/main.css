@@ -9,7 +9,7 @@ body {
 
 header {
 	border-bottom: 1px dotted #fff;
-	margin-bottom: 10px;
+/*	margin-bottom: 10px;*/
 }
 
 #user img {
@@ -20,4 +20,21 @@ header {
 
 .username {
 	color: #72ba52;
+}
+
+#graph{
+	clear: both;
+	font-size: 3em;
+	margin: 5px 0;
+	height: 735px;
+}
+
+.anchorNode {
+	height: 25px;
+	width: 25px;
+}
+
+footer { 
+	font-size: 1em;
+	margin-top: 10px;
 }
