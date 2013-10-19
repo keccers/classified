@@ -1,5 +1,5 @@
 {
-  "BundleIdentifier" : "mashupify",
+  "BundleIdentifier" : "classified",
   "BundleType"       : "Application",
   "BundleVersion"    : "0.1.3",
   "VendorIdentifier" : "com.spotify",
@@ -19,7 +19,7 @@
     "en": "Mashupify"
   },
   "AppDescription": {
-    "en": "Spotify Mashupifier"
+    "en": "Classified"
   },
   "AppIcon": {
     "18x18": "images/visualizer-18x18.png",
