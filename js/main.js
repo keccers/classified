@@ -1,6 +1,16 @@
-require(['$api/models', '$api/location'], function(models, location) {
+require(['$api/models', '$api/models#User', '$api/location', '$views/popup'], function(models, location, popup) {
+
+  var user = models.User.fromURI(models.session.user.uri);
+
+  user.load('username', 'name').done(function(u) {
+    console.log(u.username);
+    console.log(u.image);
+    var user = document.getElementById('user');
+    user.innerHTML = user.innerHTML + "<img class='profile-pic' src='" + u.image + "'/><br/><span class='username'>" + u.username + "</span><br/><span class='real-name'>" + u.name + "</span><br/><span class='listening'>Listening to:";
+  });
 
   var player = models.player;
+  var profile = models.track;
 
   var track = models.Track.fromURI('spotify:track:2hNTfrAILBLesbPootV83e');
   player.playTrack(track);
