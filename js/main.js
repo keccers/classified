@@ -1,6 +1,14 @@
-require(['$api/models', '$api/location'], function(models, location) {
+require(['$api/models', '$api/models#User', '$api/location'], function(models, location) {
+
+  var user = models.User.fromURI(models.session.user.uri);
+
+  user.load('username', 'name').done(function(u) {
+    console.log(u.username);
+    console.log(u.image);
+  });
 
   var player = models.player;
+  var profile = models.track;
 
   var track = models.Track.fromURI('spotify:track:2hNTfrAILBLesbPootV83e');
   player.playTrack(track);
@@ -14,7 +22,7 @@ require(['$api/models', '$api/location'], function(models, location) {
     });
   };
 
-    setInterval(timeLapse,1000);
+    // setInterval(timeLapse,1000);
 });
 
 
