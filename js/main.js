@@ -1,14 +1,4 @@
-require(['$api/models', '$api/models#User', '$api/location', '$views/popup'], function(models, location, popup) {
-
-  var user = models.User.fromURI(models.session.user.uri);
-
-  user.load('username', 'name').done(function(u) {
-    var user = document.getElementById('user');
-    user.innerHTML = user.innerHTML + "<img class='profile-pic' src='" + u.image + "'/><br/><span class='username'>" + u.username + "</span><br/><span class='real-name'>" + u.name + "</span>";
-  });
-
-  $('.sp-button').on('click',function() { 
-  require(['$api/models'], function(models) {
+require(['$api/models'], function(models) {
   var user = models.User.fromURI(models.session.user.uri);
   var player = models.player;
 
